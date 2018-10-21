@@ -1,0 +1,24 @@
+language: python
+
+
+python:
+  - "3.5"
+
+
+
+install:
+  - pip install -r requirements.txt
+  - pip install coverage
+  
+
+
+script: true
+  - pytest --with-coverage --coverage report
+  
+
+after_script:
+  - coveralls
+ 
+
+after_success:
+  - codecov
