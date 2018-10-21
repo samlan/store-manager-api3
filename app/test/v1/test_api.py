@@ -1,8 +1,10 @@
-from flask import Flask, request,Blueprint
-from flask_restful import Resource, Api, abort,reqparse
+import json
+import os
+import app
+import pytest
+from instance.config import app_config
+from app import create_app
 
-
-#test data dictionaries
 sales ={ 
     2:{'id':'2','prodname':'Iphone X','category':'mobile phones','price':'$1550','img':''},
     9:{'id':'9', 'prodname':'Google Pixel','category':'mobile phones','price':'$800','img':''},
@@ -28,18 +30,23 @@ products = {
 		
 }
 
-myblueprint = Blueprint('api', __name__, url_prefix='/api/v1')
 
-parser = reqparse.RequestParser()
-parser.add_argument('product')
-
-# shows a single product item and lets you delete a product item
-
-
-class ProductsList(Resource):
-    def get(self):
-        return products
-
+@pytest.fixture
+def client():
+    flask_app = create_app('development')
     
+    client = flask_app.test_client()
+    yield client
 
+def test_admin_view_all_products(client):
+    """
+    GIVEN a Flask application
+    WHEN the '/' page is requested (GET)
+    THEN check the response is valid
+    """
+    response = client.get('/api/v1/products')
+    assert response.status_code == 200
+    
+    
+    
 
