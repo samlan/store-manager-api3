@@ -45,6 +45,20 @@ class Products(Resource):
     def get(self,product_id):
         if int(product_id) not in products.keys():
             abort(404, message="Product {} doesn't exist".format(product_id))
-        return jsonify(products[int(product_id)])    
+        return jsonify(products[int(product_id)])
+    
+    def delete(self, product_id):
+        if int(product_id) not in products.keys():
+             abort(404, message="Product {} doesn't exist".format(product_id))
+        del products[int(product_id)]
+        return products
+    
+    def put(self, product_id):
+        if int(product_id) not in products.keys():
+            abort(404,message = "Product {} doesn't exist".format(product_id))
+        args = parser.parse_args()
+        #new_prod = {'task': args['task']}
+        products[int(product_id)] = args
+        return  products   
 
 

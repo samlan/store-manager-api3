@@ -55,6 +55,23 @@ def test_view_one_product(client):
     """
     response = client.get('/api/v1/products/8')
     assert response.status_code == 200
-    #assert response.get_data==products[8]    
+    #assert response.get_data==products[8] 
+
+def test_update_product(client):
+    """
+    GIVEN a Flask app
+    WHEN the '/products/<product_id>' is requested via (PUT)
+    THEN check the response is valid and data is changed
+    """
+    response = client.put('/api/v1/products/8')
+    assert response.status_code == 200   
     
+def test_delete_product(client):
+    """
+    GIVEN a Flask app
+    WHEN the '/products/<product_id>' is requested via (DELETE)
+    THEN check the response is valid and data is changed
+    """
+    response = client.delete('/api/v1/products/8')
+    assert response.status_code == 200   
 
