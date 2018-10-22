@@ -1,4 +1,4 @@
-from flask import Flask, request,Blueprint
+from flask import Flask, request,Blueprint,jsonify
 from flask_restful import Resource, Api, abort,reqparse
 
 
@@ -40,6 +40,11 @@ class ProductsList(Resource):
     def get(self):
         return products
 
+class Products(Resource):
     
+    def get(self,product_id):
+        if int(product_id) not in products.keys():
+            abort(404, message="Product {} doesn't exist".format(product_id))
+        return jsonify(products[int(product_id)])    
 
 

@@ -46,7 +46,15 @@ def test_admin_view_all_products(client):
     """
     response = client.get('/api/v1/products')
     assert response.status_code == 200
-    
-    
+
+def test_view_one_product(client):
+    """
+    GiVEN a Flask application
+    WHEN the '/products/<product_id>' is requested (GET)
+    THEN check the response is valid
+    """
+    response = client.get('/api/v1/products/8')
+    assert response.status_code == 200
+    #assert response.get_data==products[8]    
     
 
