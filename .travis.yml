@@ -13,7 +13,7 @@ install:
 
 
 script: true
-  - pytest --with-coverage --coverage report
+  - pytest -v app/test/v1/test_api --with-coverage --coverage report
   
 
 after_script:
