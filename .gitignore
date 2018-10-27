@@ -3,6 +3,8 @@ myvenv/
 *.pyc
 __pycache__/
 
+coverage/
+
 instance/
 
 .pytest_cache/
